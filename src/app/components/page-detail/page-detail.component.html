@@ -1,0 +1,17 @@
+<div class="event-detail" *ngIf="item">
+  <a class="long-arrow-left" routerLink="/">back</a>
+  <h1>{{item.name}}</h1>
+  <p>Дата: {{item.date}}</p>
+  <p>Команды: {{item.teams.join(' vs ')}}</p>
+  <h2>Сделайте ставку:</h2>
+  <form class="input-container" [formGroup]="betForm" (ngSubmit)="onSubmit()">
+    <div *ngFor="let option of betOptions | keyvalue">
+      <input
+        type="radio"
+        [value]="option.value"
+        formControlName="bet"/>
+      <label for="{{option.key}}">{{betOptions[option.key]}}</label>
+    </div>
+    <button [disabled]="!!item.selectedBet">Сделать ставку</button>
+  </form>
+</div>
